@@ -154,6 +154,18 @@ This means that the text object does not have the underlying query needed. This
 can be fixed by either adding in a custom query (which would override the
 current key bound) or [[https://github.com/nvim-treesitter/nvim-treesitter-textobjects/][contributing upstream!]]
 
+** Error when opening/saving files on Alpine
+Since Alpine is a musl-based distribution, by default, =/lib/ld-linux.so.2=
+doesn't exist. [[https://wiki.alpinelinux.org/wiki/Running_glibc_programs#gcompat][Its wiki offers a fix]] which can be summed up to:
+
+#+begin_src shell
+# Install the compatibility layer which creates '/lib/ld-linux.so.2'.
+apk add gcompat
+
+# From now on, start Emacs and make it use this library instead of musl.
+LD_PRELOAD=/lib/ld-linux.so.2 emacs
+#+end_src
+
 * Frequently asked questions
 /This module has no FAQs yet./ [[doom-suggest-faq:][Ask one?]]
 
